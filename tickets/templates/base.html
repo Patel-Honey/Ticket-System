@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ticketing System{% endblock %}</title>
+    <style>
+        /* Base styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007BFF; /* Bootstrap primary color */
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        /* Smaller ticket counts */
+        .ticket-counts {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .count-box {
+            padding: 10px; /* Reduced padding */
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            flex: 1;
+            margin: 0 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow */
+        }
+
+        .count-box h3 {
+            font-size: 1.2rem; /* Reduced font size */
+            margin-bottom: 5px;
+        }
+
+        .count-box p {
+            font-size: 1.8rem; /* Reduced font size */
+            font-weight: bold;
+        }
+
+        /* Gradient backgrounds for ticket counts */
+        .count-box.draft {
+            background: linear-gradient(135deg, #FFD54F, #FFB300);
+        }
+
+        .count-box.ongoing {
+            background: linear-gradient(135deg, #4FC3F7, #0288D1);
+        }
+
+        .count-box.completed {
+            background: linear-gradient(135deg, #66BB6A, #388E3C);
+        }
+
+        /* Table improvements */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 10px; /* Adjusted padding */
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Button improvements */
+        .btn-update {
+            background-color: #007BFF;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-update:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .ticket-counts {
+                flex-direction: column;
+            }
+
+            .count-box {
+                margin: 10px 0;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ticketing System</h1>
+        <nav>
+            <a href="{% url 'staff_dashboard' %}">Dashboard</a>
+            <a href="{% url 'list_tickets' %}">List Tickets</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

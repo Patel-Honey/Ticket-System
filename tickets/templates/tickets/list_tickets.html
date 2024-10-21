@@ -1,0 +1,43 @@
+<!-- templates/tickets/list_tickets.html -->
+{% extends 'base.html' %}
+
+{% block title %}List Tickets{% endblock %}
+
+{% block content %}
+    <!-- Filter Form -->
+    <h2>Filter Tickets by Status</h2>
+    <form method="GET" action="{% url 'list_tickets' %}">
+        <label for="status">Select Status:</label>
+        <select name="status" id="status" onchange="this.form.submit()"> <!-- Auto-submit form on change -->
+            <option value="">All</option>
+            <option value="draft" {% if status_filter == 'draft' %}selected{% endif %}>Draft</option>
+            <option value="ongoing" {% if status_filter == 'ongoing' %}selected{% endif %}>Ongoing</option>
+            <option value="completed" {% if status_filter == 'completed' %}selected{% endif %}>Completed</option>
+        </select>
+    </form>
+
+    <!-- Ticket List Table -->
+    <br><h2>Ticket List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Ticket Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.name }}</td>
+                    <td>{{ ticket.status }}</td>
+                    <td><a class="btn-update" href="{% url 'update_ticket' ticket.id %}">Update</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No tickets assigned.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Ticket: {{ ticket.name }}{% endblock %}
+
+{% block content %}
+    <h2>Update Ticket: {{ ticket.name }}</h2>
+
+    {% if ticket.status == 'completed' %}
+        <p>This ticket is already completed and cannot be updated.</p>
+    {% else %}
+        <form method="post" style="max-width: 500px; margin-top: 20px;">
+            {% csrf_token %}
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="status" style="display: block; font-size: 1.1rem; margin-bottom: 8px;">Status:</label>
+                <select name="status" id="status" style="width: 100%; padding: 8px; font-size: 1rem; border-radius: 5px; border: 1px solid #ced4da;">
+                    {% if ticket.status == 'draft' %}
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                    {% elif ticket.status == 'ongoing' %}
+                        <option value="completed">Completed</option>
+                    {% endif %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn-update" style="background-color: #007BFF; color: white; padding: 10px 15px; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer;">
+                Update
+            </button>
+        </form>
+    {% endif %}
+{% endblock %}
